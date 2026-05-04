@@ -196,8 +196,8 @@ source ~/.bashrc
 ### 2. Clone and Setup
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/specter-htb
-cd specter-htb
+git clone https://github.com/0xb4bal/specter.git
+cd specter
 chmod +x setup.sh
 ./setup.sh
 ```
