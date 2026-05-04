@@ -1,0 +1,42 @@
+# SPECTER HTB Agent — Hermes Configuration
+# Place at: ~/.hermes-specter/config.yaml
+# (using separate HERMES_HOME for clean separation from bounty-hawk)
+
+# ── Model ────────────────────────────────────────────────────────────────────
+model: deepseek/deepseek-chat-v4-pro
+provider: deepseek
+
+# Context requirement: 64K minimum — DeepSeek V4 Pro has 128K, good.
+
+# ── Memory ──────────────────────────────────────────────────────────────────
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+  memory_char_limit: 2200
+  user_char_limit: 1375
+
+# ── Terminal backend ─────────────────────────────────────────────────────────
+terminal:
+  backend: local        # local for now; change to docker for isolation
+  # backend: docker     # recommended later for safety
+
+# ── Telegram gateway ─────────────────────────────────────────────────────────
+telegram:
+  enabled: true
+  home_channel: your_telegram_chat_id_here
+  # Get chat ID: message your bot, then:
+  # curl https://api.telegram.org/bot$TOKEN/getUpdates
+
+# ── Cron ─────────────────────────────────────────────────────────────────────
+cron:
+  wrap_response: false      # clean output for HTB notifications
+  script_timeout_seconds: 60
+
+# ── Tools for cron jobs ──────────────────────────────────────────────────────
+# hermes tools → select "cron" platform → enable: terminal, file
+# Keep cron toolset minimal — HTB monitoring only needs terminal + file
+
+# ── Skills directory ─────────────────────────────────────────────────────────
+skills:
+  external_dirs:
+    - ./skills       # relative to working dir when hermes is started from project root
